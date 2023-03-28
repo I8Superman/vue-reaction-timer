@@ -1,8 +1,8 @@
 
 <template>
   <h1>Simons Reaction Timer</h1>
-  <Startbutton @start-timer="startTimer" :delay="delay" :gameon="gameOn" />
-  <Popupbox />
+  <Startbutton @start-timer="startTimer" :delay="timer" :gameon="gameOn" />
+  <Popupbox v-if="gameOn" :delay="timer" />
 </template>
 
 <script>
@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       gameOn: false,
-      timer: null
+      timer: null,
     }
   },
   methods: {
@@ -34,9 +34,12 @@ export default {
   background-color: lightgrey;
   width: 100vw;
   height: 100vh;
-  text-align: center;
+  /* text-align: center; */
   color: rgb(63, 61, 61);
   font-weight: 800;
   padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
