@@ -1,7 +1,7 @@
 
 <template>
-  <h1>This will be an reation timer APP!</h1>
-  <Startbutton />
+  <h1>Simons Reaction Timer</h1>
+  <Startbutton @start-timer="startTimer" :delay="delay" :gameon="gameOn" />
   <Popupbox />
 </template>
 
@@ -11,8 +11,32 @@ import Startbutton from './components/Startbutton.vue';
 
 export default {
   name: "App",
-  components: { Popupbox, Startbutton }
+  components: { Popupbox, Startbutton },
+  data() {
+    return {
+      gameOn: false,
+      timer: null
+    }
+  },
+  methods: {
+    startTimer() {
+      console.log('timer started!')
+      this.gameOn = !this.gameOn
+      this.timer = Math.random() * 5000 + 2000
+      console.log(this.timer)
+    }
+  }
 }
 </script>
 
-<style scoped></style>
+<style>
+#app {
+  background-color: lightgrey;
+  width: 100vw;
+  height: 100vh;
+  text-align: center;
+  color: rgb(63, 61, 61);
+  font-weight: 800;
+  padding-top: 100px;
+}
+</style>
