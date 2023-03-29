@@ -20,9 +20,9 @@ export default {
   },
   methods: {
     startTimer() {
-      console.log('timer started!')
+      console.log('Appearance timer started!')
       this.gameOn = !this.gameOn
-      this.timer = Math.random() * 5000 + 2000
+      this.timer = 1000 + Math.random() * 4000
       console.log(this.timer)
     }
   }

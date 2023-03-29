@@ -1,5 +1,5 @@
 <template>
-    <div class="popup">
+    <div class="popup" v-if="showPopup" @click="stopReactionTimer">
         Click me fast you sonofabitch!!!
     </div>
 </template>
@@ -8,10 +8,35 @@
 export default {
     name: 'Popupbox',
     props: ['delay'],
+    data() {
+        return {
+            showPopup: false,
+            popupClicked: false,
+            timer: null,
+            reactionTime: 0
+        }
+    },
     mounted() {
         setTimeout(() => {
-            console.log(`Time's up! Timer was set at ${this.delay}`)
+            this.showPopup = true
+            console.log(this.delay)
+            this.startReactionTimer()
         }, this.delay)
+    },
+    // updated() {
+    //     console.log(this.reactionTime)
+    // },
+    methods: {
+        startReactionTimer() {
+            console.log('Reaction timer started!')
+            this.timer = setInterval(() => {
+                this.reactionTime += 10
+            }, 10)
+        },
+        stopReactionTimer() {
+            clearInterval(this.timer)
+            console.log(this.reactionTime)
+        }
     }
 }
 </script>
