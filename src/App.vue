@@ -2,28 +2,40 @@
 <template>
   <h1>Simons Reaction Timer</h1>
   <Startbutton @start-timer="startTimer" :delay="timer" :gameon="gameOn" />
-  <Popupbox v-if="gameOn" :delay="timer" />
+  <Popupbox v-if="gameOn" :delay="timer" @stop="displayResults" />
+  <Results v-if="viewResults" :result="score" />
 </template>
 
 <script>
 import Popupbox from './components/Popupbox.vue';
 import Startbutton from './components/Startbutton.vue';
+import Results from './components/Results.vue'
 
 export default {
   name: "App",
-  components: { Popupbox, Startbutton },
+  components: { Popupbox, Startbutton, Results },
   data() {
     return {
       gameOn: false,
       timer: null,
+      score: 0,
+      viewResults: false,
+      resultMsg: ''
     }
   },
   methods: {
     startTimer() {
       console.log('Appearance timer started!')
+      this.viewResults = false
       this.gameOn = !this.gameOn
+      this.showResults = false
       this.timer = 1000 + Math.random() * 4000
-      console.log(this.timer)
+    },
+    displayResults(reactiontime) {
+      console.log('The results are in!', reactiontime)
+      this.score = reactiontime
+      this.viewResults = true
+      this.gameOn = !this.gameOn
     }
   }
 }

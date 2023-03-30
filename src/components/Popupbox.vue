@@ -19,7 +19,6 @@ export default {
     mounted() {
         setTimeout(() => {
             this.showPopup = true
-            console.log(this.delay)
             this.startReactionTimer()
         }, this.delay)
     },
@@ -28,14 +27,14 @@ export default {
     // },
     methods: {
         startReactionTimer() {
-            console.log('Reaction timer started!')
             this.timer = setInterval(() => {
                 this.reactionTime += 10
             }, 10)
         },
         stopReactionTimer() {
+            this.$emit('stop', this.reactionTime)
             clearInterval(this.timer)
-            console.log(this.reactionTime)
+            this.timer = 0
         }
     }
 }
